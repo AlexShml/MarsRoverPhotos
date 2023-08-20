@@ -1,11 +1,19 @@
 import React from "react";
-import { View, ActivityIndicator, StyleSheet } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 
 const LoadingScreen = () => {
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" color="#ffd700" />
-    </View>
+    <ImageBackground
+      source={require("../../assets/splash/Splash.png")}
+      style={styles.container}
+    >
+      <ActivityIndicator size="large" color="#228b22" />
+    </ImageBackground>
   );
 };
 
@@ -14,7 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#228b22",
   },
 });
 
