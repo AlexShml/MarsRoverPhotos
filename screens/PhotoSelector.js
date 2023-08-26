@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-const PhotoSelector = ({ onShowPhotos }) => {
+const PhotoSelector = ({ onShowPhotos, navigation }) => {
   const [camera, setCamera] = useState("fhaz");
   const [date, setDate] = useState("");
 

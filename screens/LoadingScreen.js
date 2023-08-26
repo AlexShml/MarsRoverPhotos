@@ -9,7 +9,7 @@ import {
 const LoadingScreen = () => {
   return (
     <ImageBackground
-      source={require("../../assets/splash/Splash.png")}
+      source={require("../assets/splash/Splash.png")}
       style={styles.container}
     >
       <ActivityIndicator size="large" color="#228b22" />

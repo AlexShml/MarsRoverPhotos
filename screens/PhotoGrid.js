@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image, FlatList, StyleSheet } from "react-native";
 
-const PhotoGrid = ({ photos }) => {
+const PhotoGrid = ({ photos, navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList
