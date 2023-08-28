@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  View,
-  ActivityIndicator,
-  StyleSheet,
-  ImageBackground,
-} from "react-native";
+import { ActivityIndicator, StyleSheet, ImageBackground } from "react-native";
 
 const LoadingScreen = () => {
   return (
     <ImageBackground
       source={require("../../assets/splash/Splash.png")}
-      style={styles.container}
+      style={styles.imageBackground}
     >
       <ActivityIndicator size="large" color="#228b22" />
     </ImageBackground>
@@ -18,7 +13,8 @@ const LoadingScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  imageBackground: {
+    width: "100%",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",

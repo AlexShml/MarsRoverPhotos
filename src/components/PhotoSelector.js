@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { PhotoContext, usePhotoContext } from "./PhotoContext";
+import { useNavigation } from "@react-navigation/native";
+import LoadingScreen from "./LoadingScreen";
 
-const PhotoSelector = ({ onShowPhotos }) => {
+const PhotoSelector = () => {
+  const navigation = useNavigation();
+  const { onShowPhotos, isLoading } = useContext(PhotoContext);
   const [camera, setCamera] = useState("fhaz");
   const [date, setDate] = useState("");
 
   const handleShowPhotos = () => {
     onShowPhotos(camera, date);
+    navigation.navigate("PhotoGrid");
   };
 
   return (
