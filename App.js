@@ -7,7 +7,7 @@ import { HeaderBackButton } from "@react-navigation/elements";
 import axios from "axios";
 import PhotoSelector from "./src/components/PhotoSelector";
 import PhotoGrid from "./src/components/PhotoGrid";
-import LoadingScreen from "./src/components/LoadingScreen";
+import FullScreenPhoto from "./src/components/FullScreenPhoto";
 import { PhotoContext } from "./src/components/PhotoContext";
 
 const Stack = createStackNavigator();
@@ -77,6 +77,12 @@ const AppStack = () => {
           name="PhotoGrid"
           component={PhotoGrid}
           options={{ title: "PhotoGrid" }}
+        />
+
+        <Stack.Screen
+          name="FullScreenPhoto"
+          component={FullScreenPhoto}
+          options={{ title: "Full Screen Photo" }}
         />
       </Stack.Navigator>
     </PhotoContext.Provider>

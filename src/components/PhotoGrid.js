@@ -1,10 +1,22 @@
-import React, { useContext } from "react";
-import { View, Image, FlatList, StyleSheet } from "react-native";
+import React, { useContext, useCallback } from "react";
+import {
+  View,
+  Image,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { PhotoContext } from "./PhotoContext";
 import LoadingScreen from "./LoadingScreen";
 
 const PhotoGrid = () => {
   const { photos, isLoading } = useContext(PhotoContext);
+  const navigation = useNavigation();
+  const handlePhotoPress = (imageUrl) => {
+    navigation.navigate("FullScreenPhoto", { imageUrl });
+  };
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -16,7 +28,9 @@ const PhotoGrid = () => {
             numColumns={3}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <Image source={{ uri: item.img_src }} style={styles.image} />
+              <TouchableOpacity onPress={() => handlePhotoPress(item.img_src)}>
+                <Image source={{ uri: item.img_src }} style={styles.image} />
+              </TouchableOpacity>
             )}
           />
         </View>
