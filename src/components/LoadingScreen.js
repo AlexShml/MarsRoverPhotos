@@ -1,5 +1,13 @@
 import React from "react";
-import { ActivityIndicator, StyleSheet, ImageBackground } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  ImageBackground,
+  Dimensions,
+} from "react-native";
+
+let deviceHeight = Dimensions.get("window").height;
+let deviceWidth = Dimensions.get("window").width;
 
 const LoadingScreen = () => {
   return (
@@ -14,7 +22,8 @@ const LoadingScreen = () => {
 
 const styles = StyleSheet.create({
   imageBackground: {
-    width: "100%",
+    width: deviceWidth,
+    height: deviceHeight,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",

@@ -1,8 +1,9 @@
 import "react-native-gesture-handler";
-import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HeaderBackButton } from "@react-navigation/elements";
 import axios from "axios";
 import PhotoSelector from "./src/components/PhotoSelector";
@@ -10,11 +11,13 @@ import PhotoGrid from "./src/components/PhotoGrid";
 import FullScreenPhoto from "./src/components/FullScreenPhoto";
 import { PhotoContext } from "./src/components/PhotoContext";
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar backgroundColor={"#DCCEBE"} /* hidden */ />
       <AppStack />
     </NavigationContainer>
   );
@@ -28,6 +31,7 @@ const AppStack = () => {
   const [selectedDate, setSelectedDate] = useState("");
 
   const onShowPhotos = async (camera, date) => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos",
@@ -56,6 +60,7 @@ const AppStack = () => {
         screenOptions={{
           headerStyle: styles.header,
           headerTitleStyle: styles.headerTitle,
+          navigationBarHidden: true,
         }}
       >
         <Stack.Screen
@@ -76,13 +81,18 @@ const AppStack = () => {
         <Stack.Screen
           name="PhotoGrid"
           component={PhotoGrid}
-          options={{ title: "PhotoGrid" }}
+          options={{
+            title: "PhotoGrid",
+          }}
         />
 
         <Stack.Screen
           name="FullScreenPhoto"
           component={FullScreenPhoto}
-          options={{ title: "Full Screen Photo" }}
+          options={{
+            title: "Full Screen Photo",
+            headerStyle: { backgroundColor: "black", borderColor: "black" },
+          }}
         />
       </Stack.Navigator>
     </PhotoContext.Provider>
@@ -91,10 +101,7 @@ const AppStack = () => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#fff",
-    elevation: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    backgroundColor: "#DCCEBE",
   },
   headerTitle: {
     fontWeight: "bold",

@@ -2,13 +2,17 @@ import React, { useContext, useCallback } from "react";
 import {
   View,
   Image,
-  FlatList,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { PhotoContext } from "./PhotoContext";
 import LoadingScreen from "./LoadingScreen";
+
+let deviceHeight = Dimensions.get("window").height;
+let deviceWidth = Dimensions.get("window").width;
 
 const PhotoGrid = () => {
   const { photos, isLoading } = useContext(PhotoContext);
@@ -22,18 +26,18 @@ const PhotoGrid = () => {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <View style={styles.flatlist}>
-          <FlatList
-            data={photos}
-            numColumns={3}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => handlePhotoPress(item.img_src)}>
+        <ScrollView style={{ backgroundColor: "#DCCEBE" }}>
+          <View style={styles.flatlist}>
+            {photos.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handlePhotoPress(item.img_src)}
+              >
                 <Image source={{ uri: item.img_src }} style={styles.image} />
               </TouchableOpacity>
-            )}
-          />
-        </View>
+            ))}
+          </View>
+        </ScrollView>
       )}
     </View>
   );
@@ -47,14 +51,18 @@ const styles = StyleSheet.create({
   },
 
   flatlist: {
-    padding: 16,
-    backgroundColor: "#f0f0f0",
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    margin: 16,
+    backgroundColor: "#DCCEBE",
   },
+
   image: {
-    width: 100,
-    height: 100,
+    width: deviceWidth / 3 - 19,
+    height: deviceHeight / 7,
     margin: 4,
-    resizeMode: "cover",
+    borderRadius: 8,
   },
 });
 
