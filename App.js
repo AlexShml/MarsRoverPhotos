@@ -32,6 +32,7 @@ const AppStack = () => {
 
   const onShowPhotos = async (camera, date) => {
     setIsLoading(true);
+    date = date.replace(/\//g, "-");
     try {
       const response = await axios.get(
         "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos",
